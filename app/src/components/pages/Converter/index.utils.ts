@@ -1,6 +1,5 @@
-import { SUPPORTED_CURRENCIES } from '@/main.constants';
+import { ERROR_MESSAGES, SUPPORTED_CURRENCIES } from '@/main.constants';
 import { createCodes } from '@/utils';
-import { ERROR_MESSAGES } from './index.constants';
 
 export function amountIsNaN(amount: number) {
   return Number.isNaN(amount);

@@ -1,0 +1,24 @@
+import { CurrentCurency } from '@/main.types';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography/Typography';
+import { defaultCurrency } from './pages/Currency';
+
+export function CurrencyCard({ code, country, name, rate }: CurrentCurency) {
+  return (
+    <Grid item xs={2} sm={4} md={4}>
+      <Card>
+        <CardContent>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            {country}
+          </Typography>
+          <Typography variant="h5" component="div" gutterBottom>
+            {name}
+          </Typography>
+          <Typography variant="body2">{`1 ${code} = ${rate} ${defaultCurrency}`}</Typography>
+        </CardContent>
+      </Card>
+    </Grid>
+  );
+}

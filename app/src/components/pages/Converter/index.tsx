@@ -4,9 +4,10 @@ import type { KeyboardEvent } from 'react';
 import { splitConversationValue } from '@/utils';
 import { useConvert } from '@/hooks/useConvert';
 import { Typography } from '@mui/material';
-import { ERROR_MESSAGES, LABEL } from './index.constants';
+import { LABEL } from './index.constants';
 import { validateInput } from './index.utils';
 import { Loader } from '@/components/Loader';
+import { ERROR_MESSAGES } from '@/main.constants';
 
 export function Converter() {
   const [inputValue, setInputValue] = useState<string>('');
