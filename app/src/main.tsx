@@ -1,4 +1,4 @@
-import { CssBaseline } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@fontsource/roboto/300.css';
@@ -10,8 +10,7 @@ import { router } from './router';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <CssBaseline>
-      <RouterProvider router={router} />
-    </CssBaseline>
+    <CssBaseline />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
