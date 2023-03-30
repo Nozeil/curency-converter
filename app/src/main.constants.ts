@@ -1,12 +1,26 @@
 export const PATHS = {
   CONVERTER: '/',
-  CURRENCY: 'currency',
-  NOT_FOUND: 'notFound',
+  CURRENCY: '/currency',
+  NOT_FOUND: '/notFound',
+} as const;
+
+export const TEST_IDS = {
+  CONVERTER_PAGE: 'ConverterPage',
+  CURRENCY_PAGE: 'CurrencyPage',
+  NOT_FOUND_PAGE: 'NOT_FOUND',
+  CONVERTER_TEXT_FIELD: 'ConverterTextField',
+  CURRENCY_TEXT_FIELD: 'ConverterTextField',
+  CONVERTER_LINK: 'ConverterLink',
+  CURRENCY_LINK: 'CurrencyLink',
+  CONVERTED_VALUES: 'ConvertedValues',
+  LOADER: 'Loader',
+  CURRENCY_CARD: 'CurrencyCard',
+  CURRENCY_SELECT: 'Select',
 } as const;
 
 export const NAV_ITEMS = [
-  { to: PATHS.CONVERTER, primary: 'Converter' },
-  { to: PATHS.CURRENCY, primary: 'Currency' },
+  { to: PATHS.CONVERTER, primary: 'Converter', testId: TEST_IDS.CONVERTER_LINK },
+  { to: PATHS.CURRENCY, primary: 'Currency', testId: TEST_IDS.CURRENCY_LINK },
 ] as const;
 
 export const ERROR_MESSAGES = {

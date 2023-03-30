@@ -1,4 +1,5 @@
 import { useAppSelector } from '@/hooks';
+import { TEST_IDS } from '@/main.constants';
 import { CurrentCurency } from '@/main.types';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,7 +10,7 @@ export function CurrencyCard({ code, country, name, rate }: CurrentCurency) {
   const selectedCurrency = useAppSelector((state) => state.userValues.selectedCurrency);
 
   return (
-    <Grid item xs={2} sm={4} md={4}>
+    <Grid data-testid={TEST_IDS.CURRENCY_CARD} item xs={2} sm={4} md={4}>
       <Card>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

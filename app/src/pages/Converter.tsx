@@ -1,11 +1,17 @@
 import { Converter } from '@/components/Converter';
-import { CODES } from '@/main.constants';
+import { CODES, TEST_IDS } from '@/main.constants';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 export function ConverterPage() {
   return (
-    <Grid container component="section" flexDirection="column" gap={1}>
+    <Grid
+      container
+      component="section"
+      flexDirection="column"
+      gap={1}
+      data-testid={TEST_IDS.CONVERTER_PAGE}
+    >
       <Grid item textAlign="left">
         <Typography variant="h6">
           In order to convert the currency you need to perform only two actions:

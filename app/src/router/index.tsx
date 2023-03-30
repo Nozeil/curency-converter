@@ -13,6 +13,6 @@ const elems = (
   </Route>
 );
 
-const routes = createRoutesFromElements(elems);
+export const routes = createRoutesFromElements(elems);
 
 export const router = createBrowserRouter(routes);

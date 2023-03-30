@@ -10,7 +10,7 @@ import {
   validateInput,
 } from './index.utils';
 import { Loader } from '@/components/Loader';
-import { ERROR_MESSAGES } from '@/main.constants';
+import { ERROR_MESSAGES, TEST_IDS } from '@/main.constants';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { setConverterValue, setValidationMessage } from '@/redux/selectedCurrencySlice';
 import { useGetConversationQuery, useLazyGetConversationQuery } from '@/services/currencySlice';
@@ -55,7 +55,12 @@ export function Converter() {
     const createdContent = createContent(converterValue, conversionResult);
     content = (
       <Grid container justifyContent="center" alignItems="center">
-        <Typography textAlign="center" variant="body1" fontSize="1.8rem">
+        <Typography
+          data-testid={TEST_IDS.CONVERTED_VALUES}
+          textAlign="center"
+          variant="body1"
+          fontSize="1.8rem"
+        >
           {createdContent}
         </Typography>
       </Grid>
@@ -73,6 +78,7 @@ export function Converter() {
       <Grid
         item
         component={TextField}
+        inputProps={{ 'data-testid': TEST_IDS.CONVERTER_TEXT_FIELD }}
         InputProps={{
           onKeyUp,
           fullWidth: true,
@@ -83,9 +89,9 @@ export function Converter() {
         variant="outlined"
         defaultValue={converterValue}
         helperText={validationMessage}
-        sx={{ margin: '20px' }}
         minWidth="200px"
         width="50%"
+        sx={{ margin: '20px' }}
       />
       <Grid item height="80px">
         {content}

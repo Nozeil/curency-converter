@@ -13,7 +13,13 @@ export function DesktopNav({ children: MenuButton }: PropsWithChildren) {
         {MenuButton}
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: { sm: '5px' } }}>
           {NAV_ITEMS.map((item) => (
-            <Button key={item.primary} component={NavLink} to={item.to} sx={{ color: '#fff' }}>
+            <Button
+              key={item.primary}
+              data-testid={item.testId}
+              component={NavLink}
+              to={item.to}
+              sx={{ color: '#fff' }}
+            >
               {item.primary}
             </Button>
           ))}
