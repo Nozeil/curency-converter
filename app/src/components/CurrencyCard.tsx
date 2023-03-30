@@ -1,11 +1,13 @@
+import { useAppSelector } from '@/hooks';
 import { CurrentCurency } from '@/main.types';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography/Typography';
-import { defaultCurrency } from './pages/Currency';
 
 export function CurrencyCard({ code, country, name, rate }: CurrentCurency) {
+  const selectedCurrency = useAppSelector((state) => state.selectedCurrency.value);
+
   return (
     <Grid item xs={2} sm={4} md={4}>
       <Card>
@@ -16,7 +18,7 @@ export function CurrencyCard({ code, country, name, rate }: CurrentCurency) {
           <Typography variant="h5" component="div" gutterBottom>
             {name}
           </Typography>
-          <Typography variant="body2">{`1 ${code} = ${rate} ${defaultCurrency}`}</Typography>
+          <Typography variant="body2">{`1 ${code} = ${rate} ${selectedCurrency}`}</Typography>
         </CardContent>
       </Card>
     </Grid>

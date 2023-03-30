@@ -1,3 +1,5 @@
+import { ERROR_MESSAGES } from '@/main.constants';
+
 export function NotFound() {
-  return <div>Not found</div>;
+  return <div>{ERROR_MESSAGES.SERVER}</div>;
 }

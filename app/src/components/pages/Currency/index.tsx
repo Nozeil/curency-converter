@@ -6,20 +6,20 @@ import { Grid } from '@mui/material';
 import { reduceSupportedCurrencies } from './index.utils';
 import { CurrencyCard } from '@/components/CurrencyCard';
 import { CurrencySelect } from '@/components/CurrencySelect';
-
-export const defaultCurrency = 'BYN';
+import { useAppSelector } from '@/hooks';
 
 export function Currency() {
-  const { data: currency, isLoading, isSuccess, isError } = useGetLatestQuery(defaultCurrency);
+  const selectedCurrency = useAppSelector((state) => state.selectedCurrency.value);
+  const { data: currency, isFetching, isSuccess, isError } = useGetLatestQuery(selectedCurrency);
 
   const generatedCurrencys = useMemo(() => {
     const rates = currency?.conversion_rates;
-    return rates ? reduceSupportedCurrencies(rates, defaultCurrency) : [];
-  }, [currency]);
+    return rates ? reduceSupportedCurrencies(rates, selectedCurrency) : [];
+  }, [currency, selectedCurrency]);
 
   let content;
 
-  if (isLoading) {
+  if (isFetching) {
     content = <Loader />;
   } else if (isSuccess) {
     content = generatedCurrencys.map((currency) => (
