@@ -35,8 +35,7 @@ export function Converter() {
   const element = isLoading ? <Loader /> : <Typography>{content}</Typography>;
 
   return (
-    <section>
-      <Typography component="h3">Enter text in the format: 15 rub in usd</Typography>
+    <>
       <TextField
         InputProps={{
           onKeyUp: onKeyUp,
@@ -49,6 +48,6 @@ export function Converter() {
         helperText={errorMessage}
       />
       {element}
-    </section>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { ERROR_MESSAGES } from '@/main.constants';
 import { useGetLatestQuery } from '@/services/currencySlice';
 import { useMemo } from 'react';
-import { Loader } from '../../Loader';
+import { Loader } from '../Loader';
 import { Grid } from '@mui/material';
 import { reduceSupportedCurrencies } from './index.utils';
 import { CurrencyCard } from '@/components/CurrencyCard';
@@ -36,11 +36,11 @@ export function Currency() {
   }
 
   return (
-    <section>
+    <>
       <CurrencySelect />
       <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 2, sm: 8, md: 12 }}>
         {content}
       </Grid>
-    </section>
+    </>
   );
 }
