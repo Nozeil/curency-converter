@@ -9,7 +9,7 @@ interface Props {
 
 const sx = {
   display: { xs: 'block', sm: 'none' },
-  '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+  '& .MuiDrawer-paper': { boxSizing: 'border-box', justifyContent: 'center', width: 240 },
 } as const;
 
 export function MobileNav({

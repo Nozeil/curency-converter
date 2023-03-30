@@ -11,7 +11,7 @@ export function DesktopNav({ children: MenuButton }: PropsWithChildren) {
     <AppBar component="nav">
       <Toolbar>
         {MenuButton}
-        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: { sm: '5px' } }}>
           {NAV_ITEMS.map((item) => (
             <Button key={item.primary} component={NavLink} to={item.to} sx={{ color: '#fff' }}>
               {item.primary}

@@ -8,8 +8,8 @@ export function Layout() {
   return (
     <>
       <Header />
-      <Container>
-        <Box component="main" sx={{ p: 3 }}>
+      <Container sx={{ height: '100%' }}>
+        <Box component="main" sx={{ p: 3, height: '100%' }}>
           <Toolbar />
           <Outlet />
         </Box>

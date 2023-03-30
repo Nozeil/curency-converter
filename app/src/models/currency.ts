@@ -1,4 +1,4 @@
-import { SUPPORTED_CURRENCIES } from '@/main.constants';
+import { CODES } from '@/main.constants';
 
 export interface ConversationRequestParams {
   from: string;
@@ -22,9 +22,7 @@ export interface ConversationResponse extends Response {
   conversion_result: number;
 }
 
-const keys = SUPPORTED_CURRENCIES.map((item) => item.code);
-
-export type ConversionRates = { [key in (typeof keys)[number]]: number };
+export type ConversionRates = { [key in (typeof CODES)[number]]: number };
 
 export interface CurrencyResponse extends Response {
   conversion_rates: ConversionRates;

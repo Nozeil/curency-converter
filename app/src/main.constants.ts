@@ -184,3 +184,5 @@ export const SUPPORTED_CURRENCIES = [
   { code: 'ZMW', name: 'Zambian Kwacha', country: 'Zambia' },
   { code: 'ZWL', name: 'Zimbabwean Dollar', country: 'Zimbabwe' },
 ];
+
+export const CODES = SUPPORTED_CURRENCIES.map((item) => item.code);

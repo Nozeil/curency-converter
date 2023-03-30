@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 import type { KeyboardEvent } from 'react';
 import { splitConversationValue } from '@/utils';
-import { Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { LABEL } from './index.constants';
 import {
   createContent,
@@ -49,31 +49,47 @@ export function Converter() {
   let content;
 
   if (isFetching) {
-    content = <Loader />;
+    content = <Grid item component={Loader} />;
   } else if (isSuccess) {
-    console.log(conversion);
     const conversionResult = conversion.conversion_result;
     const createdContent = createContent(converterValue, conversionResult);
-    content = <Typography>{createdContent}</Typography>;
+    content = (
+      <Grid container justifyContent="center" alignItems="center">
+        <Typography textAlign="center" variant="body1" fontSize="1.8rem">
+          {createdContent}
+        </Typography>
+      </Grid>
+    );
   } else if (isError) {
-    content = <Typography>{ERROR_MESSAGES.SERVER}</Typography>;
+    content = (
+      <Typography textAlign="center" variant="body1" fontSize="1.8rem">
+        {ERROR_MESSAGES.SERVER}
+      </Typography>
+    );
   }
 
   return (
-    <>
-      <TextField
+    <Grid container justifyContent="center" alignItems="center" flexDirection="column">
+      <Grid
+        item
+        component={TextField}
         InputProps={{
           onKeyUp,
+          fullWidth: true,
         }}
         error={!!validationMessage}
         autoComplete="off"
         label={LABEL}
         variant="outlined"
-        margin="normal"
         defaultValue={converterValue}
         helperText={validationMessage}
+        sx={{ margin: '20px' }}
+        minWidth="200px"
+        width="50%"
       />
-      {content}
-    </>
+      <Grid item height="80px">
+        {content}
+      </Grid>
+    </Grid>
   );
 }

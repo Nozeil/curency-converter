@@ -1,0 +1,9 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.active {
+  background-color: #1e8bf8 !important;
+}

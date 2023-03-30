@@ -15,7 +15,7 @@ export function CurrencyCard({ code, country, name, rate }: CurrentCurency) {
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {country}
           </Typography>
-          <Typography variant="h5" component="div" gutterBottom>
+          <Typography variant="h5" component="div" gutterBottom noWrap>
             {name}
           </Typography>
           <Typography variant="body2">{`1 ${code} = ${rate} ${selectedCurrency}`}</Typography>
