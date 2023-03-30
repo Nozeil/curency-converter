@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography/Typography';
 
 export function CurrencyCard({ code, country, name, rate }: CurrentCurency) {
-  const selectedCurrency = useAppSelector((state) => state.selectedCurrency.value);
+  const selectedCurrency = useAppSelector((state) => state.userValues.selectedCurrency);
 
   return (
     <Grid item xs={2} sm={4} md={4}>

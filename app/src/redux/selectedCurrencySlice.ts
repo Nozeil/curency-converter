@@ -1,23 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface SelectedCurrencyState {
-  value: string;
+interface UserValuesState {
+  selectedCurrency: string;
+  converterValue: string;
+  validationMessage: string;
 }
 
-const initialState: SelectedCurrencyState = {
-  value: 'BYN',
+const initialState: UserValuesState = {
+  selectedCurrency: 'BYN',
+  converterValue: '',
+  validationMessage: '',
 };
 
-export const selectedCurrencySlice = createSlice({
+export const userValuesSlice = createSlice({
   name: 'selectedCurrency',
   initialState,
   reducers: {
     setSelectedCurrency: (state, action: PayloadAction<string>) => {
-      state.value = action.payload;
+      state.selectedCurrency = action.payload;
+    },
+    setConverterValue: (state, action: PayloadAction<string>) => {
+      state.converterValue = action.payload;
+    },
+    setValidationMessage: (state, action: PayloadAction<string>) => {
+      state.validationMessage = action.payload;
     },
   },
 });
 
-export const { setSelectedCurrency } = selectedCurrencySlice.actions;
+export const { setSelectedCurrency, setConverterValue, setValidationMessage } =
+  userValuesSlice.actions;
 
-export default selectedCurrencySlice.reducer;
+export default userValuesSlice.reducer;

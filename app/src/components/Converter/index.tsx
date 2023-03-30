@@ -1,18 +1,32 @@
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { splitConversationValue } from '@/utils';
-import { useConvert } from '@/hooks/useConvert';
 import { Typography } from '@mui/material';
 import { LABEL } from './index.constants';
-import { validateInput } from './index.utils';
+import {
+  createContent,
+  createConversationRequestParams,
+  getRequestParams,
+  validateInput,
+} from './index.utils';
 import { Loader } from '@/components/Loader';
 import { ERROR_MESSAGES } from '@/main.constants';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { setConverterValue, setValidationMessage } from '@/redux/selectedCurrencySlice';
+import { useGetConversationQuery, useLazyGetConversationQuery } from '@/services/currencySlice';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 export function Converter() {
-  const [inputValue, setInputValue] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const { conversionResult, isLoading, isError } = useConvert(inputValue);
+  const { converterValue, validationMessage } = useAppSelector((state) => state.userValues);
+  const dispatch = useAppDispatch();
+  const requestParams = getRequestParams(converterValue);
+  const {
+    data: conversion,
+    isFetching,
+    isSuccess,
+    isError,
+  } = useGetConversationQuery(requestParams ?? skipToken);
+  const [trigger] = useLazyGetConversationQuery();
 
   const onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'Enter') {
@@ -21,33 +35,45 @@ export function Converter() {
       const validationResult = validateInput(splittedValue);
 
       if (validationResult.isValid) {
-        setInputValue(value);
-        setErrorMessage('');
+        dispatch(setConverterValue(value));
+        dispatch(setValidationMessage(''));
+        const params = createConversationRequestParams(value);
+        trigger(params);
         e.currentTarget.blur();
       } else {
-        setErrorMessage(validationResult.message);
+        dispatch(setValidationMessage(validationResult.message));
       }
     }
   };
 
-  const content = isError ? ERROR_MESSAGES.SERVER : conversionResult;
+  let content;
 
-  const element = isLoading ? <Loader /> : <Typography>{content}</Typography>;
+  if (isFetching) {
+    content = <Loader />;
+  } else if (isSuccess) {
+    console.log(conversion);
+    const conversionResult = conversion.conversion_result;
+    const createdContent = createContent(converterValue, conversionResult);
+    content = <Typography>{createdContent}</Typography>;
+  } else if (isError) {
+    content = <Typography>{ERROR_MESSAGES.SERVER}</Typography>;
+  }
 
   return (
     <>
       <TextField
         InputProps={{
-          onKeyUp: onKeyUp,
+          onKeyUp,
         }}
-        error={!!errorMessage}
+        error={!!validationMessage}
         autoComplete="off"
         label={LABEL}
         variant="outlined"
         margin="normal"
-        helperText={errorMessage}
+        defaultValue={converterValue}
+        helperText={validationMessage}
       />
-      {element}
+      {content}
     </>
   );
 }

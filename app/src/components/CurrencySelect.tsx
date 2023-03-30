@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 const LABEL = 'Currency';
 
 export function CurrencySelect() {
-  const selectedCurrency = useAppSelector((state) => state.selectedCurrency.value);
+  const selectedCurrency = useAppSelector((state) => state.userValues.selectedCurrency);
   const dispatch = useAppDispatch();
 
   const onChange = (event: SelectChangeEvent<unknown>) => {

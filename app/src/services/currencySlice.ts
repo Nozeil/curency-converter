@@ -1,4 +1,8 @@
-import { CurrencyResponse } from '@/models/currency';
+import {
+  ConversationRequestParams,
+  ConversationResponse,
+  CurrencyResponse,
+} from '@/models/currency';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const KEY = '43bdd2c47cb82eda969d85a0';
@@ -11,7 +15,11 @@ export const currencyApiSlice = createApi({
     getLatest: builder.query<CurrencyResponse, string>({
       query: (currency) => `/latest/${currency}`,
     }),
+    getConversation: builder.query<ConversationResponse, ConversationRequestParams>({
+      query: ({ from, to, amount }) => `pair/${from}/${to}/${amount}`,
+    }),
   }),
 });
 
-export const { useGetLatestQuery } = currencyApiSlice;
+export const { useGetLatestQuery, useGetConversationQuery, useLazyGetConversationQuery } =
+  currencyApiSlice;

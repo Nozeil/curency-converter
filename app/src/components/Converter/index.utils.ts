@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES, SUPPORTED_CURRENCIES } from '@/main.constants';
-import { createCodes } from '@/utils';
+import { createCodes, splitConversationValue } from '@/utils';
 
 export function amountIsNaN(amount: number) {
   return Number.isNaN(amount);
@@ -46,4 +46,19 @@ export function validateInput(value: string[]) {
   }
 
   return defaultResult;
+}
+
+export function createConversationRequestParams(value: string) {
+  const [amount, from, _, to] = splitConversationValue(value);
+  const { fromCode, toCode } = createCodes(from, to);
+  return { amount, from: fromCode, to: toCode };
+}
+
+export function getRequestParams(value: string) {
+  return value ? createConversationRequestParams(value) : undefined;
+}
+
+export function createContent(value: string, conversationResult: number) {
+  const { amount, from, to } = createConversationRequestParams(value);
+  return `${amount} ${from} = ${conversationResult.toFixed(2)} ${to}`;
 }

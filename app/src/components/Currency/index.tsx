@@ -2,14 +2,14 @@ import { ERROR_MESSAGES } from '@/main.constants';
 import { useGetLatestQuery } from '@/services/currencySlice';
 import { useMemo } from 'react';
 import { Loader } from '../Loader';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { reduceSupportedCurrencies } from './index.utils';
 import { CurrencyCard } from '@/components/CurrencyCard';
 import { CurrencySelect } from '@/components/CurrencySelect';
 import { useAppSelector } from '@/hooks';
 
 export function Currency() {
-  const selectedCurrency = useAppSelector((state) => state.selectedCurrency.value);
+  const selectedCurrency = useAppSelector((state) => state.userValues.selectedCurrency);
   const { data: currency, isFetching, isSuccess, isError } = useGetLatestQuery(selectedCurrency);
 
   const generatedCurrencys = useMemo(() => {
@@ -32,7 +32,7 @@ export function Currency() {
       />
     ));
   } else if (isError) {
-    content = ERROR_MESSAGES.SERVER;
+    content = <Typography>{ERROR_MESSAGES.SERVER}</Typography>;
   }
 
   return (
